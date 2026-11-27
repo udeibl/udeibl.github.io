@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#141822"/>
+      <stop offset="100%" stop-color="#050609"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5a4a"/>
+      <stop offset="100%" stop-color="#c9241e"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="256" height="256" rx="44" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="88" fill="none" stroke="rgba(255,90,74,0.22)" stroke-width="3"/>
+  <circle cx="128" cy="128" r="78" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="3 9"/>
+  <!-- 12, 3, 6, 9 Ticks -->
+  <g stroke="#ff5a4a" stroke-width="4" stroke-linecap="round">
+    <line x1="128" y1="46" x2="128" y2="58"/>
+    <line x1="210" y1="128" x2="198" y2="128"/>
+    <line x1="128" y1="210" x2="128" y2="198"/>
+    <line x1="46" y1="128" x2="58" y2="128"/>
+  </g>
+  <!-- Dezente Mondsichel oben rechts -->
+  <path d="M166 78a16 16 0 1 1-18 22 13 13 0 0 0 18-22z" fill="#ff7a5a" opacity="0.85"/>
+  <!-- Zeiger (23:10 Nachtzeit) -->
+  <line x1="128" y1="128" x2="108" y2="86" stroke="#eaeef5" stroke-width="7" stroke-linecap="round"/>
+  <line x1="128" y1="128" x2="174" y2="102" stroke="url(#accent)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="128" cy="128" r="7" fill="#080a0f" stroke="#ff5a4a" stroke-width="4"/>
+</svg>

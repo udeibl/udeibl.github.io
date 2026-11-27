@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UD Apps &amp; Games – Tester-Übersicht</title>
+  <meta name="description" content="Alle aktuellen Android-Apps &amp; Spiele zum Testen über Google Play – effizient, modern und ohne Ballast.">
+
+  <!-- OpenGraph / WhatsApp & Social Vorschau -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://udeibl.github.io/">
+  <meta property="og:title" content="UD Apps &amp; Games – Tester-Übersicht">
+  <meta property="og:description" content="Alle aktuellen Android-Apps &amp; Spiele zum Testen über Google Play: Emberfall, Nachtsuhr und mehr.">
+  <meta property="og:image" content="https://udeibl.github.io/assets/og-banner.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#050609">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="brand-avatar" src="assets/ud-logo.png" alt="UD Logo">
+      <div class="kicker"><span class="dot"></span>Google Play · Tester-Hub</div>
+      <h1>UD Apps &amp; Games</h1>
+      <p class="claim">
+        Moderne Software mit Fokus auf Effizienz &amp; Präzision – von smarten Alltags-Apps und Cyber-Security bis zu taktischen Tools &amp; Games.
+      </p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Kinderleichte 2-Schritte-Anleitung -->
+    <section class="guide" aria-label="Anleitung für Tester">
+      <div class="guide-head">
+        <h2 class="guide-title">So installierst du die Test-Apps (in 2 kurzen Schritten)</h2>
+        <span class="guide-badge">Nur beim allerersten Mal pro App nötig</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <b>Einmalig als Tester freischalten</b>
+            <p>Tippe bei der gewünschten App auf <em>„1. Tester werden“</em> und bestätige im Browser. Wichtig: Nutze dort dasselbe Google-Konto wie im Play Store.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <b>Ganz normal im Play Store laden</b>
+            <p>Tippe danach auf <em>„2. Play Store öffnen“</em> und installiere die App. Zukünftige Updates kommen ab dann automatisch über Google Play.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamische App-Übersicht (aus apps.json geladen) -->
+    <div class="sec-row">
+      <h2 class="sec-title">Aktuelle Apps zum Testen</h2>
+      <div id="updated-meta" class="sec-meta"></div>
+    </div>
+    <section id="apps-grid" class="apps-grid" aria-live="polite">
+      <noscript>
+        <p>Bitte aktiviere JavaScript oder öffne die Apps direkt im Google Play Store.</p>
+      </noscript>
+    </section>
+
+    <!-- Kurze Hilfe für Anfänger -->
+    <div class="sec-row">
+      <h2 class="sec-title">Häufige Fragen</h2>
+    </div>
+    <section class="faq">
+      <details>
+        <summary>Der Play Store zeigt „Element nicht gefunden“ – was tun?</summary>
+        <p>
+          Das passiert fast immer aus einem von zwei Gründen: Entweder wurde Schritt 1 (<em>„Tester werden“</em>) noch nicht angeklickt,
+          oder im Handy-Browser ist ein anderes Google-Konto angemeldet als in der Play-Store-App. Prüfe kurz oben rechts im Browser dein Google-Konto und tippe dann nochmal auf Schritt 1.
+        </p>
+      </details>
+      <details>
+        <summary>Werde ich über neue Updates benachrichtigt?</summary>
+        <p>
+          Sobald du eine App installiert hast, liefert der Google Play Store Updates automatisch aus – genau wie bei jeder anderen App. Bei größeren Neuheiten oder brandneuen Apps melde ich mich kurz mit dem Link zu dieser Seite.
+        </p>
+      </details>
+      <details>
+        <summary>Wie kann ich Fehler oder Ideen melden?</summary>
+        <p>
+          Antworte mir einfach direkt per E-Mail oder WhatsApp (gern mit kurzem Hinweis, welches Smartphone du nutzt oder einem Screenshot). Jedes Feedback hilft enorm!
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      UD · Android-Entwicklung &nbsp;·&nbsp;
+      <a href="https://gist.github.com/udeibl/8194c573f783787837c752080c3bc37a" target="_blank" rel="noopener">Datenschutzerklärung</a>
+    </div>
+  </footer>
+
+  <script>
+    (async function loadCatalog() {
+      const grid = document.getElementById('apps-grid');
+      const meta = document.getElementById('updated-meta');
+      try {
+        const res = await fetch('apps.json?v=' + Math.floor(Date.now() / 60000));
+        const data = await res.json();
+        if (data.updatedAt && meta) {
+          const [y, m, d] = data.updatedAt.split('-');
+          meta.textContent = `Stand: ${d}.${m}.${y} · ${data.apps.length} Apps verfügbar`;
+        }
+        grid.innerHTML = '';
+        data.apps.forEach((app) => {
+          const card = document.createElement('article');
+          card.className = 'app-card';
+          const tags = (app.highlights || []).map((t) => `<span class="tag">${t}</span>`).join('');
+          const whatsNew = app.whatsNew
+            ? `<div class="whats-new"><b>Aktuell:</b> ${app.whatsNew}</div>`
+            : '';
+          card.innerHTML = `
+            <div class="app-top">
+              <img class="app-icon" src="${app.icon}" alt="${app.name} Icon" loading="lazy">
+              <div class="app-head">
+                <div class="app-name-row">
+                  <h3 class="app-name">${app.name}</h3>
+                  <span class="status-pill">${app.status}</span>
+                </div>
+                <div class="app-meta">${app.category} · Version ${app.version}</div>
+              </div>
+            </div>
+            <p class="app-desc">${app.summary}</p>
+            <div class="tags">${tags}</div>
+            ${whatsNew}
+            <div class="app-actions">
+              <a class="btn btn-primary" href="${app.optInUrl}" target="_blank" rel="noopener">
+                1. Tester werden (einmalig)
+              </a>
+              <a class="btn btn-secondary" href="${app.storeUrl}" target="_blank" rel="noopener">
+                2. Google Play Store öffnen
+              </a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        grid.innerHTML = '<p style="color:#ff7a72">App-Liste konnte nicht geladen werden. Bitte Seite neu laden.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>

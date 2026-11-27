@@ -1,0 +1,41 @@
+{
+  "updatedAt": "2026-11-27",
+  "testerGroup": "deibl-tester@googlegroups.com",
+  "apps": [
+    {
+      "id": "de.udeibl.emberfall",
+      "name": "Emberfall",
+      "category": "Dark-Fantasy Spiel",
+      "status": "Geschlossener Test",
+      "version": "1.0.1",
+      "icon": "assets/icon-emberfall.png",
+      "summary": "Düsteres Action-Survival-Roguelite: Dein schwebender Glutgeist ist dein einziges Licht in der Dunkelheit. Mit 6-Schritte-Tutorial, 4 Helden, 3 Welten & Bossen – komplett offline spielbar.",
+      "highlights": [
+        "Offline & ohne Werbung",
+        "Interaktives Tutorial",
+        "4 Helden · 9 Waffen · 3 Bosse",
+        "Optimiert für Foldables & 120 Hz"
+      ],
+      "whatsNew": "Erstveröffentlichung für die Tester-Runde (API 36, Cutout-Schutz, Performance-Optimierungen für alle Android-Geräte).",
+      "optInUrl": "https://play.google.com/apps/testing/de.udeibl.emberfall",
+      "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.emberfall"
+    },
+    {
+      "id": "de.udeibl.nachtsuhr",
+      "name": "Nachtsuhr",
+      "category": "Alltags-App",
+      "status": "Geschlossener Test",
+      "version": "Beta",
+      "icon": "assets/icon-nachtsuhr.svg",
+      "summary": "Schlanke, augenschonende Nachtsuhr-App für den Nachttisch – minimalistisch, klar ablesbar und ohne unnötigen Ballast.",
+      "highlights": [
+        "Offline & werbefrei",
+        "Augenschonend im Dunkeln",
+        "Minimalistisch & effizient"
+      ],
+      "whatsNew": "Bereit für die Tester-Runde im Google Play Store.",
+      "optInUrl": "https://play.google.com/apps/testing/de.udeibl.nachtsuhr",
+      "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.nachtsuhr"
+    }
+  ]
+}
