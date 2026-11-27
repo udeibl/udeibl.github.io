@@ -6,7 +6,7 @@
       "name": "Emberfall",
       "category": "Dark-Fantasy Spiel",
       "status": "Geschlossener Test",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "icon": "assets/icon-emberfall.png",
       "summary": "Düsteres Action-Survival-Roguelite: Dein schwebender Glutgeist ist dein einziges Licht in der Dunkelheit. Mit 6-Schritte-Tutorial, 4 Helden, 3 Welten & Bossen – komplett offline spielbar.",
       "highlights": [
@@ -15,7 +15,7 @@
         "4 Helden · 9 Waffen · 3 Bosse",
         "Optimiert für Foldables & 120 Hz"
       ],
-      "whatsNew": "Erstveröffentlichung für die Tester-Runde (API 36, Cutout-Schutz, Performance-Optimierungen für alle Android-Geräte).",
+      "whatsNew": "v1.0.2: Geupgradetes Himmelsfeuer (Meteore) verteilt sich jetzt über mehr Fläche, neue Boss- & Elite-Lebensanzeigen inkl. LP/Prozent und übersichtliche 2-Schritt-Auswahl (erst Held, dann Welt).",
       "optInUrl": "https://play.google.com/apps/testing/de.udeibl.emberfall",
       "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.emberfall"
     },
