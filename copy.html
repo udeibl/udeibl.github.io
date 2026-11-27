@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Tester freischalten – deibl.de</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .helper-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .helper-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-red);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .helper-card h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+    .email-box {
+      padding: 13px 15px;
+      border-radius: 11px;
+      background: #080a0f;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 16px;
+      color: #fff;
+      word-break: break-all;
+      text-align: center;
+      user-select: all;
+      -webkit-user-select: all;
+    }
+    .copy-ok {
+      text-align: center;
+      font-size: 13px;
+      color: var(--good);
+      min-height: 18px;
+    }
+    .helper-meta {
+      font-size: 13.5px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: -6px;
+    }
+  </style>
+</head>
+<body>
+  <main class="helper-wrap">
+    <div class="helper-card">
+      <div class="kicker" style="margin:0 auto 2px"><span class="dot"></span>Admin-Helfer · deibl.de</div>
+      <h1 style="text-align:center">Neuen Tester freischalten</h1>
+      <div id="h-name" class="helper-meta"></div>
+      <div id="h-email" class="email-box">—</div>
+      <div id="h-status" class="copy-ok"></div>
+
+      <button id="btn-copy" class="btn btn-primary btn-full" type="button">
+        E-Mail-Adresse kopieren
+      </button>
+      <a class="btn btn-secondary btn-full" href="https://play.google.com/console" target="_blank" rel="noopener">
+        Google Play Console öffnen
+      </a>
+      <a id="btn-reply" class="btn btn-secondary btn-full" href="#">
+        Freischaltungs-Mail an Tester senden
+      </a>
+      <a class="fallback-link" href="https://deibl.de">← Zurück zu <span>deibl.de</span></a>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const email = (params.get('e') || '').trim();
+      const name = (params.get('n') || '').trim();
+      const emailEl = document.getElementById('h-email');
+      const nameEl = document.getElementById('h-name');
+      const statusEl = document.getElementById('h-status');
+      const copyBtn = document.getElementById('btn-copy');
+      const replyBtn = document.getElementById('btn-reply');
+
+      if (!email) {
+        emailEl.textContent = 'Keine Adresse übergeben';
+        copyBtn.disabled = true;
+        replyBtn.style.display = 'none';
+        return;
+      }
+
+      emailEl.textContent = email;
+      if (name && name !== '(nicht angegeben)') {
+        nameEl.textContent = 'Anfrage von: ' + name;
+      }
+
+      const greet = (name && name !== '(nicht angegeben)') ? `Hallo ${name},` : 'Hallo,';
+      const subject = 'Du bist als Tester für meine Android-Apps freigeschaltet!';
+      const body =
+        `${greet}\n\n` +
+        `ich habe dein Google-Konto (${email}) gerade für meine Android-Test-Apps freigeschaltet.\n\n` +
+        `Alle aktuellen Apps findest du ab sofort direkt auf meiner Seite:\n` +
+        `https://deibl.de\n\n` +
+        `Dort kannst du jede App mit einem Klick direkt im Google Play Store öffnen und installieren. Zukünftige Updates kommen dann automatisch.\n\n` +
+        `Viel Spaß beim Ausprobieren – meld dich gern, falls dir etwas auffällt!\n\n` +
+        `Viele Grüße\nUlrich`;
+      replyBtn.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      async function doCopy() {
+        try {
+          await navigator.clipboard.writeText(email);
+          statusEl.textContent = '✓ In die Zwischenablage kopiert!';
+          copyBtn.textContent = '✓ Kopiert! Nochmal kopieren';
+        } catch (err) {
+          // Fallback über Auswahl
+          const range = document.createRange();
+          range.selectNodeContents(emailEl);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          document.execCommand('copy');
+          statusEl.textContent = '✓ Adresse markiert / kopiert!';
+        }
+      }
+
+      copyBtn.addEventListener('click', doCopy);
+      // Versucht beim Öffnen automatisch zu kopieren (klappt in vielen Browsern direkt)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          statusEl.textContent = '✓ Automatisch in die Zwischenablage kopiert!';
+        }).catch(() => {});
+      }
+    })();
+  </script>
+</body>
+</html>

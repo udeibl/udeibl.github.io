@@ -111,7 +111,7 @@
           <summary>Der Play Store zeigt „Element nicht gefunden“ – was tun?</summary>
           <p>
             Tippe bei der jeweiligen App unter dem roten Button kurz auf <em>„Einmalig als Tester freischalten“</em> und bestätige im Browser.
-            Achte dabei darauf, dass im Browser dasselbe Google-Konto aktiv ist wie in deiner Play-Store-App (und dass du bereits Mitglied der Tester-Gruppe bist).
+            Achte dabei darauf, dass im Browser dasselbe Google-Konto aktiv ist wie in deiner Play-Store-App (und dass dein Konto bereits für meine Tester-Runde freigeschaltet ist).
           </p>
         </details>
         <details>
@@ -273,6 +273,7 @@
         status.className = 'form-status';
 
         try {
+          const copyUrl = 'https://deibl.de/copy.html?e=' + encodeURIComponent(email) + (name ? '&n=' + encodeURIComponent(name) : '');
           const res = await fetch('https://formsubmit.co/ajax/ulrich@deibl.de', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -282,7 +283,8 @@
               _template: 'table',
               Google_Konto: email,
               Name: name || '(nicht angegeben)',
-              Freischalten_in_Google_Groups: 'https://groups.google.com/g/deibl-tester/members',
+              Ein_Klick_Kopieren_und_Antworten: copyUrl,
+              Google_Play_Console: 'https://play.google.com/console',
             }),
           });
           const data = await res.json().catch(() => ({}));
