@@ -67,25 +67,40 @@
         </noscript>
       </div>
 
-      <!-- Bewerbung für die Tester-Gruppe (Google Groups 1-Klick-Genehmigung) -->
-      <div id="bewerben" class="apply-card">
+      <!-- Direkt auf deibl.de: Tester werden (sendet im Hintergrund an ulrich@deibl.de) -->
+      <div id="tester-werden" class="apply-card">
         <div>
-          <h3>Noch kein Tester? Jetzt bewerben!</h3>
+          <h3>Lust mitzutesten?</h3>
           <p>
-            Tritt einmalig meiner privaten Google-Tester-Gruppe bei. Sobald ich deine Anfrage kurz bestätigt habe, bist du <strong>automatisch für alle aktuellen und zukünftigen Android-Apps</strong> freigeschaltet.
+            Trag einfach deine Google-E-Mail-Adresse ein. Ich schalte dich kurz frei – ab dann bist du <strong>automatisch für alle aktuellen und zukünftigen Android-Apps</strong> dabei.
           </p>
           <ul class="apply-steps">
-            <li><b>1.</b><span>Auf <em>„Als Tester bewerben“</em> tippen.</span></li>
-            <li><b>2.</b><span>Mit deinem Google-Konto auf <em>„Beitritt anfragen“</em> klicken.</span></li>
-            <li><b>3.</b><span>Nach meiner kurzen Freigabe kannst du jede App oben direkt im Play Store laden.</span></li>
+            <li><b>1.</b><span>Google-Play-Adresse (z.&nbsp;B. <em>@gmail.com</em>) eintragen und auf <em>„Tester werden“</em> tippen.</span></li>
+            <li><b>2.</b><span>Ich füge dich kurz zu meiner privaten Tester-Runde hinzu.</span></li>
+            <li><b>3.</b><span>Danach kannst du jede App oben direkt mit einem Klick im Play Store laden.</span></li>
           </ul>
         </div>
         <div class="apply-cta">
-          <a class="btn btn-primary btn-full" href="https://groups.google.com/g/deibl-tester" target="_blank" rel="noopener">
-            Als Tester bewerben (Google-Konto)
-          </a>
+          <form id="tester-form" class="tester-form" novalidate>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <div>
+              <label class="field-label" for="tester-email">Deine Google-Konto-E-Mail *</label>
+              <input id="tester-email" class="field-input" type="email" inputmode="email" autocomplete="email" placeholder="dein.name@gmail.com" required>
+            </div>
+            <div>
+              <label class="field-label" for="tester-name">Dein Name (optional)</label>
+              <input id="tester-name" class="field-input" type="text" autocomplete="name" placeholder="z. B. Max">
+            </div>
+            <div id="email-hint" class="field-hint">
+              Für Google-Play-Tests wird die E-Mail deines Google-Play-Kontos benötigt.
+            </div>
+            <button id="tester-submit" type="submit" class="btn btn-primary btn-full">
+              Tester werden
+            </button>
+            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+          </form>
           <div class="google-note">
-            <strong>Nur Google-Konten:</strong> Für Google-Play-Tests ist zwingend dieselbe Google-E-Mail-Adresse nötig, mit der du im Play Store angemeldet bist.
+            Kein Spam – deine Adresse wird nur für die Google-Play-Freischaltung genutzt.
           </div>
         </div>
       </div>
@@ -213,6 +228,78 @@
       } catch (err) {
         grid.innerHTML = '<p style="color:#ff7a72">App-Liste konnte nicht geladen werden. Bitte Seite neu laden.</p>';
       }
+    })();
+
+    (function initTesterForm() {
+      const form = document.getElementById('tester-form');
+      const emailEl = document.getElementById('tester-email');
+      const nameEl = document.getElementById('tester-name');
+      const hintEl = document.getElementById('email-hint');
+      const btn = document.getElementById('tester-submit');
+      const status = document.getElementById('form-status');
+      if (!form) return;
+
+      const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      const isGoogleMail = (v) => /@(gmail\.com|googlemail\.com)$/i.test(v);
+
+      emailEl.addEventListener('input', () => {
+        const val = emailEl.value.trim();
+        status.className = 'form-status';
+        status.textContent = '';
+        if (!val) {
+          hintEl.className = 'field-hint';
+          hintEl.textContent = 'Für Google-Play-Tests wird die E-Mail deines Google-Play-Kontos benötigt.';
+        } else if (isEmail(val) && !isGoogleMail(val)) {
+          hintEl.className = 'field-hint warn';
+          hintEl.textContent = 'Hinweis: Das ist keine @gmail.com-Adresse. Falls dein Google-Play-Konto trotzdem unter dieser Adresse läuft, kannst du sie natürlich absenden.';
+        } else {
+          hintEl.className = 'field-hint';
+          hintEl.textContent = 'Passt – diese Adresse wird für den Google Play Store freigeschaltet.';
+        }
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = emailEl.value.trim();
+        const name = nameEl.value.trim();
+        if (!isEmail(email)) {
+          hintEl.className = 'field-hint err';
+          hintEl.textContent = 'Bitte gib eine gültige Google-E-Mail-Adresse ein.';
+          emailEl.focus();
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = 'Wird gesendet …';
+        status.className = 'form-status';
+
+        try {
+          const res = await fetch('https://formsubmit.co/ajax/ulrich@deibl.de', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              _subject: 'Neue Tester-Anfrage auf deibl.de: ' + email,
+              _captcha: 'false',
+              _template: 'table',
+              Google_Konto: email,
+              Name: name || '(nicht angegeben)',
+              Freischalten_in_Google_Groups: 'https://groups.google.com/g/deibl-tester/members',
+            }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || data.success === 'false') throw new Error('send failed');
+          status.className = 'form-status ok';
+          status.innerHTML = '<strong>Anfrage erhalten!</strong> Ich schalte dich kurz frei – sobald du dabei bist, kannst du oben jede App direkt im Google Play Store laden.';
+          form.reset();
+          hintEl.className = 'field-hint';
+          hintEl.textContent = 'Für Google-Play-Tests wird die E-Mail deines Google-Play-Kontos benötigt.';
+        } catch (err) {
+          status.className = 'form-status err';
+          status.innerHTML = 'Klappte gerade leider nicht automatisch. Schreib mir einfach kurz direkt an <a href="mailto:ulrich@deibl.de?subject=Tester%20werden&body=Bitte%20schalte%20mein%20Google-Konto%20frei:%20' + encodeURIComponent(email) + '" style="text-decoration:underline;color:#fff">ulrich@deibl.de</a>.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Tester werden';
+        }
+      });
     })();
   </script>
 </body>
