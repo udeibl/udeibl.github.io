@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UD Apps &amp; Games – Tester-Übersicht</title>
-  <meta name="description" content="Alle aktuellen Android-Apps &amp; Spiele zum Testen über Google Play – effizient, modern und ohne Ballast.">
+  <title>Ulrich Deibl – Apps, Tools, Games &amp; Cyber Security (deibl.de)</title>
+  <meta name="description" content="Moderne Software mit Fokus auf Effizienz &amp; Präzision – von smarten Alltags-Apps und Cyber-Security bis zu taktischen Tools &amp; Games. Inklusive Tester-Bereich für Google Play.">
+  <link rel="canonical" href="https://deibl.de/">
 
   <!-- OpenGraph / WhatsApp & Social Vorschau -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://udeibl.github.io/">
-  <meta property="og:title" content="UD Apps &amp; Games – Tester-Übersicht">
-  <meta property="og:description" content="Alle aktuellen Android-Apps &amp; Spiele zum Testen über Google Play: Emberfall, Nachtsuhr und mehr.">
-  <meta property="og:image" content="https://udeibl.github.io/assets/og-banner.jpg">
+  <meta property="og:url" content="https://deibl.de/">
+  <meta property="og:title" content="deibl.de – Apps, Games &amp; Tester-Bereich">
+  <meta property="og:description" content="Moderne Software mit Fokus auf Effizienz &amp; Präzision – alle aktuellen Android-Apps &amp; Spiele zum Testen über Google Play.">
+  <meta property="og:image" content="https://deibl.de/assets/og-banner.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -21,84 +22,142 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero">
+  <!-- Schlanke Sticky-Navigation -->
+  <nav class="topbar" aria-label="Hauptnavigation">
+    <div class="topbar-inner">
+      <a class="nav-brand" href="#uebersicht">
+        <img src="assets/ud-logo.png" alt="UD">
+        <div>deibl<span>.de</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#uebersicht">Übersicht</a>
+        <a href="#tester" class="nav-cta">Tester-Bereich</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero / Übersicht -->
+  <header id="uebersicht" class="hero">
     <div class="hero-inner">
-      <img class="brand-avatar" src="assets/ud-logo.png" alt="UD Logo">
-      <div class="kicker"><span class="dot"></span>Google Play · Tester-Hub</div>
-      <h1>UD Apps &amp; Games</h1>
+      <img class="brand-avatar" src="assets/ud-logo.png" alt="Ulrich Deibl Logo">
+      <div class="kicker"><span class="dot"></span>Apps · Tactical · Games · Cyber Security</div>
+      <h1>Ulrich Deibl</h1>
       <p class="claim">
         Moderne Software mit Fokus auf Effizienz &amp; Präzision – von smarten Alltags-Apps und Cyber-Security bis zu taktischen Tools &amp; Games.
       </p>
+      <div class="hero-btns">
+        <a class="btn btn-primary" href="#tester">Zu den Test-Apps</a>
+        <a class="btn btn-secondary" href="#bewerben">Als Tester bewerben</a>
+      </div>
     </div>
   </header>
 
   <main class="wrap">
-    <!-- Kinderleichte 2-Schritte-Anleitung -->
-    <section class="guide" aria-label="Anleitung für Tester">
-      <div class="guide-head">
-        <h2 class="guide-title">So installierst du die Test-Apps (in 2 kurzen Schritten)</h2>
-        <span class="guide-badge">Nur beim allerersten Mal pro App nötig</span>
+    <!-- Kompakte Schwerpunkte (leicht erweiterbar für künftige IT-Dienstleistungen) -->
+    <section class="pillars" aria-label="Schwerpunkte">
+      <div class="pillar">
+        <div class="pillar-tag">01 · Alltag</div>
+        <b>Effiziente Apps</b>
+        <p>Schlanke Werkzeuge für den Alltag – schnell, offline-fähig und ohne unnötigen Ballast.</p>
       </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div>
-            <b>Einmalig als Tester freischalten</b>
-            <p>Tippe bei der gewünschten App auf <em>„1. Tester werden“</em> und bestätige im Browser. Wichtig: Nutze dort dasselbe Google-Konto wie im Play Store.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div>
-            <b>Ganz normal im Play Store laden</b>
-            <p>Tippe danach auf <em>„2. Play Store öffnen“</em> und installiere die App. Zukünftige Updates kommen ab dann automatisch über Google Play.</p>
-          </div>
-        </div>
+      <div class="pillar">
+        <div class="pillar-tag">02 · Nische</div>
+        <b>Taktische Tools</b>
+        <p>Spezialisierte Anwendungen mit klarer Oberfläche und hoher Praxistauglichkeit.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-tag">03 · Gaming</div>
+        <b>Mobile Games</b>
+        <p>Atmosphärische, düstere Spiele mit Fokus auf Gameplay, Optik und Performance.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-tag">04 · Modern Tech</div>
+        <b>Cyber-Security &amp; IT</b>
+        <p>Sichere Architektur, moderne Softwareentwicklung und Raum für künftige IT-Projekte.</p>
       </div>
     </section>
 
-    <!-- Dynamische App-Übersicht (aus apps.json geladen) -->
-    <div class="sec-row">
-      <h2 class="sec-title">Aktuelle Apps zum Testen</h2>
-      <div id="updated-meta" class="sec-meta"></div>
-    </div>
-    <section id="apps-grid" class="apps-grid" aria-live="polite">
-      <noscript>
-        <p>Bitte aktiviere JavaScript oder öffne die Apps direkt im Google Play Store.</p>
-      </noscript>
+    <!-- Bereich: Tester für Ulrich Deibl's Anwendungen -->
+    <section id="tester">
+      <div class="sec-head">
+        <div>
+          <div class="sec-kicker">Google Play · Geschlossener Test</div>
+          <h2 class="sec-title">Tester für Ulrich Deibl’s Anwendungen</h2>
+        </div>
+        <div id="updated-meta" class="sec-meta"></div>
+      </div>
+
+      <!-- Dynamische App-Karten aus apps.json -->
+      <div id="apps-grid" class="apps-grid" aria-live="polite">
+        <noscript>
+          <p>Bitte aktiviere JavaScript, um die aktuelle App-Übersicht zu laden.</p>
+        </noscript>
+      </div>
+
+      <!-- Bewerbung für die Tester-Gruppe (Google Groups 1-Klick-Genehmigung) -->
+      <div id="bewerben" class="apply-card">
+        <div>
+          <h3>Noch kein Tester? Jetzt bewerben!</h3>
+          <p>
+            Tritt einmalig meiner privaten Google-Tester-Gruppe bei. Sobald ich deine Anfrage kurz bestätigt habe, bist du <strong>automatisch für alle aktuellen und zukünftigen Android-Apps</strong> freigeschaltet.
+          </p>
+          <ul class="apply-steps">
+            <li><b>1.</b><span>Auf <em>„Als Tester bewerben“</em> tippen.</span></li>
+            <li><b>2.</b><span>Mit deinem Google-Konto auf <em>„Beitritt anfragen“</em> klicken.</span></li>
+            <li><b>3.</b><span>Nach meiner kurzen Freigabe kannst du jede App oben direkt im Play Store laden.</span></li>
+          </ul>
+        </div>
+        <div class="apply-cta">
+          <a class="btn btn-primary btn-full" href="https://groups.google.com/g/deibl-tester" target="_blank" rel="noopener">
+            Als Tester bewerben (Google-Konto)
+          </a>
+          <div class="google-note">
+            <strong>Nur Google-Konten:</strong> Für Google-Play-Tests ist zwingend dieselbe Google-E-Mail-Adresse nötig, mit der du im Play Store angemeldet bist.
+          </div>
+        </div>
+      </div>
+
+      <!-- Kurze Hilfe für Anfänger -->
+      <div class="faq">
+        <details>
+          <summary>Der Play Store zeigt „Element nicht gefunden“ – was tun?</summary>
+          <p>
+            Tippe bei der jeweiligen App unter dem roten Button kurz auf <em>„Einmalig als Tester freischalten“</em> und bestätige im Browser.
+            Achte dabei darauf, dass im Browser dasselbe Google-Konto aktiv ist wie in deiner Play-Store-App (und dass du bereits Mitglied der Tester-Gruppe bist).
+          </p>
+        </details>
+        <details>
+          <summary>Wie bekomme ich Updates für die Test-Apps?</summary>
+          <p>
+            Ganz automatisch über den Google Play Store – genau wie bei normalen Apps. Bei neuen Apps oder größeren Updates schicke ich eine kurze Info mit dem Link zu <strong>deibl.de</strong>.
+          </p>
+        </details>
+        <details>
+          <summary>Wie melde ich Fehler oder Verbesserungsvorschläge?</summary>
+          <p>
+            Schreib mir einfach kurz per E-Mail an <a href="mailto:ulrich@deibl.de" style="text-decoration:underline;color:#eceef2">ulrich@deibl.de</a> oder direkt per WhatsApp – gern mit Modell deines Smartphones oder einem kurzen Screenshot.
+          </p>
+        </details>
+      </div>
     </section>
 
-    <!-- Kurze Hilfe für Anfänger -->
-    <div class="sec-row">
-      <h2 class="sec-title">Häufige Fragen</h2>
-    </div>
-    <section class="faq">
-      <details>
-        <summary>Der Play Store zeigt „Element nicht gefunden“ – was tun?</summary>
-        <p>
-          Das passiert fast immer aus einem von zwei Gründen: Entweder wurde Schritt 1 (<em>„Tester werden“</em>) noch nicht angeklickt,
-          oder im Handy-Browser ist ein anderes Google-Konto angemeldet als in der Play-Store-App. Prüfe kurz oben rechts im Browser dein Google-Konto und tippe dann nochmal auf Schritt 1.
-        </p>
-      </details>
-      <details>
-        <summary>Werde ich über neue Updates benachrichtigt?</summary>
-        <p>
-          Sobald du eine App installiert hast, liefert der Google Play Store Updates automatisch aus – genau wie bei jeder anderen App. Bei größeren Neuheiten oder brandneuen Apps melde ich mich kurz mit dem Link zu dieser Seite.
-        </p>
-      </details>
-      <details>
-        <summary>Wie kann ich Fehler oder Ideen melden?</summary>
-        <p>
-          Antworte mir einfach direkt per E-Mail oder WhatsApp (gern mit kurzem Hinweis, welches Smartphone du nutzt oder einem Screenshot). Jedes Feedback hilft enorm!
-        </p>
-      </details>
+    <!-- Kontakt -->
+    <section id="kontakt">
+      <div class="contact-card">
+        <div>
+          <h3>Kontakt &amp; Feedback</h3>
+          <p>Fragen zu einer App, Feedback aus dem Test oder Interesse an Projekten &amp; IT-Themen? Schreib mir direkt eine kurze Nachricht.</p>
+        </div>
+        <a class="btn btn-secondary" href="mailto:ulrich@deibl.de">ulrich@deibl.de</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <div>
-      UD · Android-Entwicklung &nbsp;·&nbsp;
-      <a href="https://gist.github.com/udeibl/8194c573f783787837c752080c3bc37a" target="_blank" rel="noopener">Datenschutzerklärung</a>
+      © Ulrich Deibl · deibl.de &nbsp;·&nbsp;
+      <a href="https://gist.github.com/udeibl/8194c573f783787837c752080c3bc37a" target="_blank" rel="noopener">Datenschutzerklärung (Apps)</a>
     </div>
   </footer>
 
@@ -111,7 +170,7 @@
         const data = await res.json();
         if (data.updatedAt && meta) {
           const [y, m, d] = data.updatedAt.split('-');
-          meta.textContent = `Stand: ${d}.${m}.${y} · ${data.apps.length} Apps verfügbar`;
+          meta.textContent = `Stand: ${d}.${m}.${y} · ${data.apps.length} Apps im Test`;
         }
         grid.innerHTML = '';
         data.apps.forEach((app) => {
@@ -121,6 +180,7 @@
           const whatsNew = app.whatsNew
             ? `<div class="whats-new"><b>Aktuell:</b> ${app.whatsNew}</div>`
             : '';
+          const verTxt = app.version ? ` · ${app.version === 'Beta' ? 'Beta' : 'v' + app.version}` : '';
           card.innerHTML = `
             <div class="app-top">
               <img class="app-icon" src="${app.icon}" alt="${app.name} Icon" loading="lazy">
@@ -129,18 +189,18 @@
                   <h3 class="app-name">${app.name}</h3>
                   <span class="status-pill">${app.status}</span>
                 </div>
-                <div class="app-meta">${app.category} · Version ${app.version}</div>
+                <div class="app-meta">${app.category}${verTxt}</div>
               </div>
             </div>
             <p class="app-desc">${app.summary}</p>
             <div class="tags">${tags}</div>
             ${whatsNew}
             <div class="app-actions">
-              <a class="btn btn-primary" href="${app.optInUrl}" target="_blank" rel="noopener">
-                1. Tester werden (einmalig)
+              <a class="btn btn-primary btn-full" href="${app.storeUrl}" target="_blank" rel="noopener">
+                Im Google Play Store öffnen
               </a>
-              <a class="btn btn-secondary" href="${app.storeUrl}" target="_blank" rel="noopener">
-                2. Google Play Store öffnen
+              <a class="fallback-link" href="${app.optInUrl}" target="_blank" rel="noopener">
+                App nicht sichtbar? <span>Einmalig als Tester freischalten&nbsp;→</span>
               </a>
             </div>
           `;
