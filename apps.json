@@ -24,7 +24,7 @@
       "name": "Nachtsuhr",
       "category": "Alltags-App",
       "status": "Geschlossener Test",
-      "version": "Beta",
+      "version": "1.5.1",
       "icon": "assets/icon-nachtsuhr.svg",
       "summary": "Schlanke, augenschonende Nachtsuhr-App für den Nachttisch – minimalistisch, klar ablesbar und ohne unnötigen Ballast.",
       "highlights": [
@@ -32,7 +32,7 @@
         "Augenschonend im Dunkeln",
         "Minimalistisch & effizient"
       ],
-      "whatsNew": "Bereit für die Tester-Runde im Google Play Store.",
+      "whatsNew": "Neues minimalistisches App-Icon im Deibl-IT-Design (Adaptive & Themed Icon) sowie verbesserte Wecker- & Schlummer-Steuerung.",
       "optInUrl": "https://play.google.com/apps/testing/de.udeibl.nachtsuhr",
       "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.nachtsuhr"
     }
