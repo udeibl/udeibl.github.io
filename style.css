@@ -542,3 +542,86 @@ footer a {
   text-underline-offset: 3px;
 }
 footer a:hover { color: var(--red-hi); }
+
+/* ============ 1x Tester-Gate-Modal ============ */
+.gate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(3, 4, 8, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.gate-modal.open { display: flex; }
+
+.gate-card {
+  width: 100%;
+  max-width: 430px;
+  background: linear-gradient(165deg, rgba(22, 26, 35, 0.98) 0%, rgba(10, 12, 18, 0.99) 100%);
+  border: 1px solid var(--border-red);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 36px rgba(224, 46, 38, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: gateIn 0.18s ease-out;
+}
+@keyframes gateIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.gate-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.gate-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.gate-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.gate-close:hover { color: #fff; border-color: var(--border-red); }
+.gate-desc {
+  margin: 0;
+  font-size: 14.5px;
+  color: #cfd5e0;
+  line-height: 1.5;
+}
+.gate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 2px;
+}
+.gate-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+.field-input.pulse {
+  animation: inputPulse 0.9s ease;
+}
+@keyframes inputPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 74, 64, 0.65); border-color: var(--red-hi); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 74, 64, 0); border-color: var(--red-hi); }
+  100% { box-shadow: 0 0 0 3px rgba(224, 46, 38, 0.18); }
+}

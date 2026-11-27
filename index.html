@@ -181,7 +181,88 @@
     </div>
   </footer>
 
+  <!-- Smarter 1x-Kurzcheck für geschlossene Test-Apps -->
+  <div id="gate-modal" class="gate-modal" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-card">
+      <div class="gate-head">
+        <h3 id="gate-title" class="gate-title">Geschlossener Test</h3>
+        <button id="gate-close" class="gate-close" type="button" aria-label="Schließen">✕</button>
+      </div>
+      <p id="gate-desc" class="gate-desc"></p>
+      <div class="gate-actions">
+        <a id="gate-yes" class="btn btn-primary btn-full" href="#" target="_blank" rel="noopener">
+          Ja, direkt zum Google Play Store
+        </a>
+        <button id="gate-no" class="btn btn-secondary btn-full" type="button">
+          Noch nicht → Jetzt Tester werden
+        </button>
+      </div>
+      <p class="gate-note">Deine Antwort merken wir uns auf diesem Gerät – beim nächsten Mal geht’s direkt weiter.</p>
+    </div>
+  </div>
+
   <script>
+    const TESTER_STORAGE_KEY = 'deibl_tester_v1';
+    function isKnownTester() {
+      try { return localStorage.getItem(TESTER_STORAGE_KEY) === '1'; } catch (_) { return false; }
+    }
+    function setKnownTester() {
+      try { localStorage.setItem(TESTER_STORAGE_KEY, '1'); } catch (_) { /* */ }
+    }
+    // Falls Link mit ?t=1 (z. B. aus Freischaltungs-Mail) geöffnet wird: direkt merken & URL sauber halten
+    (function checkTesterParam() {
+      const p = new URLSearchParams(location.search);
+      if (p.get('t') === '1') {
+        setKnownTester();
+        if (history.replaceState) {
+          p.delete('t');
+          const clean = location.pathname + (p.toString() ? '?' + p.toString() : '') + location.hash;
+          history.replaceState(null, '', clean);
+        }
+      }
+    })();
+
+    const Gate = (function initGate() {
+      const modal = document.getElementById('gate-modal');
+      const title = document.getElementById('gate-title');
+      const desc = document.getElementById('gate-desc');
+      const yesBtn = document.getElementById('gate-yes');
+      const noBtn = document.getElementById('gate-no');
+      const closeBtn = document.getElementById('gate-close');
+
+      function close() { modal.classList.remove('open'); }
+      function open(app) {
+        title.textContent = `${app.name} testen`;
+        desc.innerHTML = `<strong>${app.name}</strong> befindet sich aktuell im geschlossenen Google-Play-Test. Bist du schon für meine Tester-Runde freigeschaltet?`;
+        yesBtn.href = app.storeUrl;
+        modal.classList.add('open');
+      }
+
+      yesBtn.addEventListener('click', () => {
+        setKnownTester();
+        close();
+      });
+      noBtn.addEventListener('click', () => {
+        close();
+        const box = document.getElementById('tester-werden');
+        const email = document.getElementById('tester-email');
+        if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          if (email) {
+            email.focus({ preventScroll: true });
+            email.classList.remove('pulse');
+            void email.offsetWidth;
+            email.classList.add('pulse');
+          }
+        }, 420);
+      });
+      closeBtn.addEventListener('click', close);
+      modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+
+      return { open, close };
+    })();
+
     (async function loadCatalog() {
       const grid = document.getElementById('apps-grid');
       const meta = document.getElementById('updated-meta');
@@ -216,7 +297,7 @@
             <div class="tags">${tags}</div>
             ${whatsNew}
             <div class="app-actions">
-              <a class="btn btn-primary btn-full" href="${app.storeUrl}" target="_blank" rel="noopener">
+              <a class="btn btn-primary btn-full js-store-btn" href="${app.storeUrl}" target="_blank" rel="noopener">
                 Im Google Play Store öffnen
               </a>
               <a class="fallback-link" href="${app.optInUrl}" target="_blank" rel="noopener">
@@ -224,6 +305,15 @@
               </a>
             </div>
           `;
+          const storeBtn = card.querySelector('.js-store-btn');
+          if (!app.public && storeBtn) {
+            storeBtn.addEventListener('click', (e) => {
+              if (!isKnownTester()) {
+                e.preventDefault();
+                Gate.open(app);
+              }
+            });
+          }
           grid.appendChild(card);
         });
       } catch (err) {
