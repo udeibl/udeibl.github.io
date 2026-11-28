@@ -2,6 +2,24 @@
   "updatedAt": "2026-11-28",
   "apps": [
     {
+      "id": "de.udeibl.splittery",
+      "name": "Splittery",
+      "category": "Alltags-App",
+      "status": "Geschlossener Test",
+      "version": "1.0.0",
+      "icon": "assets/icon-splittery.png",
+      "summary": "Kassenbons per Kamera scannen oder als PDF-eBon (REWE, ALDI, dm u. v. m.) importieren, Artikel mit 1 Tippen zwischen 2+ Personen aufteilen und den offenen Betrag direkt als PayPal.Me-Link oder QR-Code senden – 100 % offline.",
+      "highlights": [
+        "Offline & ohne Werbung",
+        "Papier-Scan & PDF-eBon-Import",
+        "1-Tap-Aufteilung (2+ Personen)",
+        "PayPal.Me-Link, QR-Code & Verlauf"
+      ],
+      "whatsNew": "v1.0.0: Erstveröffentlichung mit integriertem Dokumentenscanner, PDF-eBon-Erkennung (REWE, ALDI, dm), Summen-Wächter, Mehr-Personen-Split, lokalem Verlauf und PayPal.Me-Link/QR-Code.",
+      "optInUrl": "https://play.google.com/apps/testing/de.udeibl.splittery",
+      "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.splittery"
+    },
+    {
       "id": "de.udeibl.emberfall",
       "name": "Emberfall",
       "category": "Dark-Fantasy Spiel",
