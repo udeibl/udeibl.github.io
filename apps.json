@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27",
+  "updatedAt": "2026-11-28",
   "apps": [
     {
       "id": "de.udeibl.emberfall",
@@ -21,18 +21,19 @@
     },
     {
       "id": "de.udeibl.nachtsuhr",
-      "name": "Nachtsuhr",
+      "name": "SmartAOD",
       "category": "Alltags-App",
       "status": "Geschlossener Test",
-      "version": "1.5.1",
+      "version": "1.7.0",
       "icon": "assets/icon-nachtsuhr.svg",
-      "summary": "Schlanke, augenschonende Nachtsuhr-App für den Nachttisch – minimalistisch, klar ablesbar und ohne unnötigen Ballast.",
+      "summary": "Smartes, augenschonendes AMOLED Always-On Display – minimalistisch, stufenlos dimmbar mit Burn-in-Schutz, flexiblen Auslösern und Wecker-Erkennung.",
       "highlights": [
         "Offline & werbefrei",
-        "Augenschonend im Dunkeln",
-        "Minimalistisch & effizient"
+        "AMOLED-Schwarz & Burn-in-Schutz",
+        "Laden · Zeitfenster · Schlafenszeit",
+        "Wecker-Symbol (inkl. WearOS) & Snooze"
       ],
-      "whatsNew": "Neues minimalistisches App-Icon im Deibl-IT-Design (Adaptive & Themed Icon) sowie verbesserte Wecker- & Schlummer-Steuerung.",
+      "whatsNew": "v1.7.0: Rebranding von „Nachtsuhr“ zu „SmartAOD“! Inkl. smartem Berechtigungs-Onboarding direkt ganz oben, flexiblen Auslösern (Laden, Zeitfenster & Schlafenszeit-Modus), WearOS-Wecker-Erkennung und automatischem Wecker-Rückzug mit Snooze-Rückkehr.",
       "optInUrl": "https://play.google.com/apps/testing/de.udeibl.nachtsuhr",
       "storeUrl": "https://play.google.com/store/apps/details?id=de.udeibl.nachtsuhr"
     }
